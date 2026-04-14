@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How we diagnosed a leaking e-commerce funnel and scaled conversion rate from 1.1% to 2.6% in 60 days using behavioral data and neuromarketing — without spending another euro on traffic.">
+    <title>1.1% to 2.6% Conversion Rate in 60 Days — Mohamed Ghallab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:#07101f; --bg-2:#0d1a2d; --bg-card:#111f33;
+            --border:rgba(255,255,255,0.06); --border-hi:rgba(59,130,246,0.28);
+            --blue:#3b82f6; --blue-light:#60a5fa; --cyan:#06b6d4;
+            --red:#ef4444; --green:#22c55e;
+            --text:#f0f4f8; --text-2:#8fa3bb; --text-3:#4e6275;
+            --nav-h:72px; --r:12px;
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+        a{text-decoration:none;color:inherit;}
+        ul{list-style:none;}
+        nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(7,16,31,0.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);z-index:100;display:flex;align-items:center;}
+        .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1160px;margin:0 auto;padding:0 24px;}
+        .logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.5px;}
+        .logo-dot{color:var(--blue);}
+        .nav-links{display:flex;align-items:center;gap:2rem;}
+        .nav-links a{font-size:0.875rem;font-weight:500;color:var(--text-2);transition:color 0.2s;}
+        .nav-links a:hover{color:var(--text);}
+        .btn-nav{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;font-size:0.875rem;font-weight:600;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,0.25);transition:all 0.2s;}
+        .btn-nav:hover{transform:translateY(-1px);}
+        .article-wrap{max-width:800px;margin:0 auto;padding:0 24px;}
+        .article-hero{padding-top:calc(var(--nav-h) + 60px);padding-bottom:60px;border-bottom:1px solid var(--border);}
+        .back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:600;color:var(--text-3);margin-bottom:2rem;transition:color 0.2s;}
+        .back-link:hover{color:var(--blue-light);}
+        .article-category{display:inline-flex;align-items:center;gap:6px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-light);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.18);padding:4px 12px;border-radius:100px;margin-bottom:1.5rem;}
+        .article-hero h1{font-size:clamp(1.75rem,3.5vw,2.75rem);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:1.5rem;}
+        .gradient-text{background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .article-meta{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;font-size:0.8rem;color:var(--text-3);}
+        .meta-divider{width:4px;height:4px;border-radius:50%;background:var(--text-3);}
+        .kpi-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:3rem 0;}
+        .kpi-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;}
+        .kpi-num{display:block;font-size:2rem;font-weight:900;letter-spacing:-1.5px;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
+        .kpi-label{font-size:0.72rem;color:var(--text-3);line-height:1.4;}
+        .article-body{padding:60px 0;}
+        h2.section-title{font-size:1.5rem;font-weight:800;letter-spacing:-0.75px;margin-bottom:1.25rem;margin-top:3rem;color:var(--text);}
+        h2.section-title:first-child{margin-top:0;}
+        h3.sub-title{font-size:1.1rem;font-weight:700;margin-bottom:0.75rem;margin-top:2rem;color:var(--blue-light);}
+        .article-body p{font-size:1rem;color:var(--text-2);line-height:1.85;margin-bottom:1.25rem;}
+        .article-body p strong{color:var(--text);font-weight:600;}
+        .exec-summary{background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.2);border-left:3px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:24px 28px;margin:2rem 0 3rem;}
+        .exec-summary h3{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-light);margin-bottom:12px;}
+        .exec-summary p{font-size:0.95rem;color:var(--text-2);line-height:1.75;margin-bottom:0.75rem;}
+        .exec-summary p:last-child{margin-bottom:0;}
+        .pull-quote{border-left:3px solid var(--blue);padding:16px 24px;margin:2rem 0;}
+        .pull-quote p{font-size:1.1rem;font-weight:600;color:var(--text);line-height:1.6;margin:0;font-style:italic;}
+        .steps{display:flex;flex-direction:column;gap:16px;margin:1.5rem 0;}
+        .step{display:flex;gap:16px;align-items:flex-start;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;}
+        .step-num{width:28px;height:28px;border-radius:8px;background:rgba(59,130,246,0.12);color:var(--blue-light);font-size:0.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+        .step-content h4{font-size:0.9rem;font-weight:700;margin-bottom:4px;}
+        .step-content p{font-size:0.83rem;color:var(--text-2);margin:0;line-height:1.6;}
+        .tech-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;margin:1.5rem 0;}
+        .tech-box h4{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px;}
+        .tech-tags{display:flex;flex-wrap:wrap;gap:8px;}
+        .tech-tag{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.16);color:var(--blue-light);font-size:0.75rem;font-weight:600;letter-spacing:0.04em;padding:4px 12px;border-radius:100px;}
+        .compare-table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
+        .compare-table th{font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:12px 16px;text-align:left;}
+        .compare-table th:first-child{color:var(--red);background:rgba(239,68,68,0.06);border-radius:8px 0 0 0;}
+        .compare-table th:last-child{color:var(--green);background:rgba(34,197,94,0.06);border-radius:0 8px 0 0;}
+        .compare-table td{font-size:0.875rem;color:var(--text-2);padding:12px 16px;border-top:1px solid var(--border);line-height:1.5;}
+        .compare-table td:first-child{background:rgba(239,68,68,0.03);}
+        .compare-table td:last-child{background:rgba(34,197,94,0.03);}
+        .insight-box{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px;margin:2rem 0;}
+        .insight-box .label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+        .insight-box p{font-size:0.9rem;color:var(--text-2);line-height:1.7;margin:0;}
+        .alert-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.18);border-radius:var(--r);padding:20px 22px;margin:1.5rem 0;font-size:0.9rem;color:var(--text-2);line-height:1.65;}
+        .alert-box strong{color:#f87171;}
+        .results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:1.5rem 0;}
+        .result-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:20px;}
+        .result-card .r-num{display:block;font-size:1.75rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
+        .result-card .r-label{font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:4px;display:block;}
+        .result-card .r-desc{font-size:0.78rem;color:var(--text-3);line-height:1.4;}
+        .article-cta{background:var(--bg-2);border:1px solid var(--border-hi);border-radius:16px;padding:40px;text-align:center;margin:4rem 0;}
+        .article-cta h3{font-size:1.4rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:0.75rem;}
+        .article-cta p{font-size:0.95rem;color:var(--text-2);margin-bottom:1.75rem;max-width:480px;margin-left:auto;margin-right:auto;}
+        .btn-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-size:0.9rem;font-weight:700;background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;box-shadow:0 4px 20px rgba(239,68,68,0.3);transition:all 0.2s;}
+        .btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(239,68,68,0.45);}
+        footer{background:var(--bg-2);border-top:1px solid var(--border);padding:48px 0 28px;}
+        .footer-inner{max-width:1160px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+        .footer-copy{font-size:0.8rem;color:var(--text-3);}
+        .footer-links{display:flex;gap:1.5rem;}
+        .footer-links a{font-size:0.8rem;color:var(--text-3);transition:color 0.2s;}
+        .footer-links a:hover{color:var(--blue-light);}
+        @media(max-width:640px){.nav-links{display:none;}.kpi-bar{grid-template-columns:1fr 1fr;}.results-grid{grid-template-columns:1fr;}.article-cta{padding:28px 20px;}}
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="logo">G<span class="logo-dot">.</span>M</a>
+        <ul class="nav-links">
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="projects.html">Case Studies</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <a href="contact.html" class="btn-nav">Get Free Revenue Audit →</a>
+    </div>
+</nav>
+
+<main>
+<div class="article-wrap">
+
+    <div class="article-hero">
+        <a href="projects.html" class="back-link">← Back to Case Studies</a>
+        <div class="article-category">⚡ CRO + Funnel Optimization</div>
+        <h1>1.1% to 2.6% Conversion Rate in 60 Days: How We Diagnosed and Fixed a <span class="gradient-text">Leaking E-commerce Funnel</span> Without Spending Another Euro on Traffic</h1>
+        <div class="article-meta">
+            <span>Mohamed Ghallab</span>
+            <span class="meta-divider"></span>
+            <span>Conversion Rate Optimization</span>
+            <span class="meta-divider"></span>
+            <span>14 min read</span>
+        </div>
+    </div>
+
+    <div class="kpi-bar">
+        <div class="kpi-box">
+            <span class="kpi-num">+136%</span>
+            <span class="kpi-label">Conversion Rate Increase</span>
+        </div>
+        <div class="kpi-box">
+            <span class="kpi-num">1.1%→2.6%</span>
+            <span class="kpi-label">CVR in 60 Days</span>
+        </div>
+        <div class="kpi-box">
+            <span class="kpi-num">€0</span>
+            <span class="kpi-label">Additional Ad Spend Required</span>
+        </div>
+    </div>
+
+    <div class="article-body">
+
+        <div class="exec-summary">
+            <h3>Executive Summary</h3>
+            <p>An e-commerce brand in a mid-tier competitive niche was converting at 1.1% — less than a third of what comparable optimized stores in the same vertical achieve. They were spending aggressively on Meta and Google paid campaigns to drive traffic, but the revenue returned didn't justify the spend. The instinct was to blame the ads.</p>
+            <p>The data told a different story. The problem wasn't traffic quality. It was that roughly 4 in every 5 visitors who showed clear purchase intent were hitting friction points in the funnel that stopped them before the checkout confirmation. The leaks were systematic, invisible in surface-level analytics, and entirely fixable without touching the ad budget.</p>
+            <p>In 60 days, using a combination of behavioral data analysis, neuromarketing principles, and systematic friction removal, the conversion rate moved from 1.1% to 2.6% — a 136% improvement. Same traffic. Same products. Same prices. Completely different result.</p>
+        </div>
+
+        <h2 class="section-title">Business Context</h2>
+        <p>The client operated a direct-to-consumer e-commerce store in the home goods and lifestyle category — a market where <strong>industry benchmark conversion rates for well-optimized stores sit between 3% and 5%</strong>. Their current rate of 1.1% meant they were operating at roughly 30% of what the market showed was achievable.</p>
+        <p>Monthly traffic: approximately 45,000 sessions, primarily driven by Meta paid campaigns (~60%) and Google Shopping (~25%). Average order value: €87. Monthly revenue at 1.1% CVR: approximately €43,000. At industry benchmark 3.5% CVR, the same traffic would generate €97,000. The gap between current state and benchmark represented <strong>€54,000 per month in unrealised revenue</strong> — being generated by the existing traffic volume but lost in the funnel before it could convert.</p>
+        <p>The team's proposed solution was to increase ad spend by €15,000/month to drive more volume. The alternative proposed: fix what was already broken before buying more traffic to pour into a leaking funnel.</p>
+
+        <div class="tech-box">
+            <h4>Tools Used</h4>
+            <div class="tech-tags">
+                <span class="tech-tag">Microsoft Clarity</span>
+                <span class="tech-tag">GA4</span>
+                <span class="tech-tag">Hotjar</span>
+                <span class="tech-tag">Shopify Analytics</span>
+                <span class="tech-tag">Google Optimize (A/B)</span>
+                <span class="tech-tag">Meta Ads Manager</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">The Problem — Where Revenue Was Disappearing</h2>
+        <p>A conversion rate of 1.2% means that for every 100 visitors who arrived at the store, 98–99 of them left without buying. Some of those visitors were browsing with no purchase intent — that's normal. But behavioral analysis revealed something different: a substantial segment of visitors were displaying clear <strong>high-intent signals</strong> (product page views of 3+ minutes, scroll depth past product images, add-to-cart actions, checkout initiations) and still not converting.</p>
+        <p>This was the critical distinction. The problem wasn't low-quality traffic bringing in casual browsers. The problem was that motivated, ready-to-buy visitors were hitting friction points that broke their purchase momentum before they could complete the transaction.</p>
+
+        <div class="alert-box">
+            <strong>The funnel breakdown:</strong> Of 45,000 monthly sessions, approximately 12,600 (28%) reached a product page and scrolled past the fold — a reasonable proxy for genuine product interest. Of those, 4,200 (33%) added to cart. Of those, 1,800 (43%) initiated checkout. Of those, 684 completed purchase (38% completion rate). A normal checkout completion rate for an optimized store is 65–75%. Every stage was leaking — but checkout was the most catastrophic single loss point.
+        </div>
+
+        <h3 class="sub-title">The Three Funnel Stages That Were Failing</h3>
+        <p>Before proposing any solutions, the diagnostic process mapped the specific failure modes at each stage. This took two weeks of data collection and analysis before a single change was made to the site.</p>
+
+        <h2 class="section-title">Investigation & Analysis — Reading What the Data Actually Showed</h2>
+
+        <h3 class="sub-title">Product Page Analysis: Why Visitors Weren't Adding to Cart</h3>
+        <p>Microsoft Clarity session recordings revealed that on mobile (which represented 68% of traffic), the primary product CTA — the "Add to Cart" button — was sitting <strong>below the fold</strong> on most device sizes. Users arriving on mobile were seeing the product images and the first two lines of description, but the conversion trigger was invisible without scrolling. Heatmap data confirmed this: click density on the product page was concentrated on images (passive engagement) with almost no clicks in the region where the CTA lived.</p>
+        <p>On desktop, a different problem: the product description was 840 words of technically accurate but cognitively exhausting copy. Eye-tracking pattern analysis via Clarity's attention heatmaps showed user attention dropping sharply after approximately 120 words. Users were reading the first paragraph, skimming the rest, and leaving — not because they'd decided not to buy, but because they hadn't been given a compelling reason to act yet, and the page had no urgency or social proof above the fold to maintain purchase momentum.</p>
+
+        <div class="insight-box">
+            <div class="label">Behavioral Insight</div>
+            <p>Session recordings of users who added to cart but didn't check out showed a consistent pattern: they would reach the cart page, then navigate back to the product page — not to continue shopping, but to re-read the product description. They were looking for reassurance that they were making the right decision. They found 840 words of product specifications but no social proof, no risk reversal, no guarantee. They closed the tab.</p>
+        </div>
+
+        <h3 class="sub-title">Cart Abandonment Analysis: The Invisible Friction</h3>
+        <p>Cart abandonment was running at 57%. Industry average for non-optimized stores: 70–75% (so this wasn't unusually high). But the abandonment pattern was concentrated in a way that suggested specific friction rather than general browser behaviour.</p>
+        <p>Clarity recordings of cart-abandonment sessions showed two dominant patterns: first, users who arrived at the cart and immediately started looking for a discount code field — they'd been conditioned by other stores to expect one, and spending time searching for a code they didn't have introduced a cognitive gap that broke momentum. Second, users who reached the cart, saw the shipping cost displayed for the first time (shipping was buried in product-page fine print), and left. <strong>The shipping cost wasn't high — it was €4.95. But it was a surprise.</strong> Surprise costs, at any level, trigger purchase abandonment.</p>
+
+        <h3 class="sub-title">Checkout Abandonment: The 70% Loss Point</h3>
+        <p>The checkout completion rate of 38% was the most severe problem. Sessions that reached checkout were, by definition, the most motivated visitors in the entire funnel — they'd made the psychological decision to buy. Losing 70% of them at checkout represented a catastrophic breakdown in the purchase journey at its most critical moment.</p>
+        <p>Analysis of the checkout flow revealed multiple compounding friction points: the checkout required account creation before payment (many stores have moved away from this — it adds a step and creates a security concern for first-time buyers), the trust signals on the checkout page were minimal (no security badges, no money-back guarantee visible, no SSL indicator highlighted), and the form required 14 fields — significantly more than the 8–10 that conversion research suggests as the optimal for single-page checkout.</p>
+
+        <div class="pull-quote">
+            <p>"A 1.2% conversion rate isn't a traffic problem. It's four separate friction points compounding across a funnel that was systematically blocking the path to purchase."</p>
+        </div>
+
+        <h2 class="section-title">Strategy — Neuromarketing as the Decision Framework</h2>
+        <p>The diagnostic data defined the problems precisely. The strategy for fixing them was built on <strong>three neuromarketing principles</strong> that govern how purchase decisions are actually made — as opposed to how marketers often assume they're made.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>Loss Aversion Over Feature Promotion</h4>
+                    <p>Humans are approximately 2.5x more motivated to avoid losing something than to acquire something equivalent in value. The product page was written to communicate what buyers would gain. It needed to be restructured to communicate what they were risking by not acting — and what they would avoid by purchasing (the risk reversal and guarantee).</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Friction Reduction at Decision Points</h4>
+                    <p>Every additional step, field, or unexpected element in the purchase flow is a decision point at which purchase momentum can be lost. The goal was not to make the journey shorter — it was to make it feel inevitable. Remove everything that introduced cognitive effort or surprise.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Social Proof as Purchase Validation</h4>
+                    <p>Visitors who are unsure about a purchase decision look to the decisions of others as a proxy for their own judgment. The store had reviews — 340 of them, averaging 4.7 stars — buried on a tab below the fold. They needed to be the first thing a visitor saw above the fold on the product page, before they'd invested enough attention to be in a position to be persuaded by product specifications.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Implementation — What Was Changed and Why</h2>
+
+        <h3 class="sub-title">Product Page Restructuring</h3>
+        <p>The above-the-fold layout on mobile was completely rebuilt. The new hierarchy, from top to bottom:</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h4>Social Proof Strip</h4>
+                    <p>A one-line trust bar: "⭐ 4.7/5 · 340 verified reviews · Free returns within 30 days." This appeared above the product title. It answered the risk question before the visitor had even formed the question consciously.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h4>Outcome-Focused Headline (Not Product Name)</h4>
+                    <p>The product title became the outcome: instead of the SKU-based product name, the headline communicated the primary benefit in one sentence. This is not a cosmetic change — it changes what the brain processes in the first 2 seconds of exposure.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h4>Sticky Add-to-Cart CTA</h4>
+                    <p>A sticky bottom bar with the Add to Cart button remained visible on mobile as the user scrolled — eliminating the problem of the CTA being out of view. The CTA copy was changed from "Add to Cart" to "Add to Cart — Free Returns" — embedding the risk reversal directly in the action trigger.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h4>Compression of Product Description</h4>
+                    <p>840 words became a 120-word benefit summary (not features — benefits and outcomes) followed by expandable specification detail for users who wanted it. Most didn't — they wanted to know if it was worth buying, not how it was made.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="sub-title">Cart Page Optimisation</h3>
+        <p>The discount code field was relocated to a collapsed "Have a discount code?" accordion link rather than an always-visible input field. This removed the visual cue that prompted users to go look for a code they didn't have. The shipping cost was surfaced on the product page itself in a small but visible format ("€4.95 shipping · Free over €60") — eliminating the surprise at cart. A cart summary redesign added a persistent trust block: security badge, returns guarantee, and a one-line urgency element based on real inventory data.</p>
+
+        <h3 class="sub-title">Checkout Flow Rebuild</h3>
+        <p>Account creation was made optional — users could check out as guest with a single click. The form was reduced from 14 to 9 fields by auto-populating the city from postcode and removing the "Address Line 2" field (which was unused in 97% of orders). Trust signals — SSL indicator, security badges, returns policy summary — were added to the right-side order summary panel visible throughout checkout. The final page redesign took the checkout completion rate from 38% to 60%.</p>
+
+        <h2 class="section-title">Results — Full Funnel Impact</h2>
+
+        <div class="results-grid">
+            <div class="result-card">
+                <span class="r-num">+136%</span>
+                <span class="r-label">Overall Conversion Rate</span>
+                <span class="r-desc">From 1.1% to 2.6% over 60 days post-implementation</span>
+            </div>
+            <div class="result-card">
+                <span class="r-num">+22%</span>
+                <span class="r-label">Add-to-Cart Rate</span>
+                <span class="r-desc">Mobile product page restructuring drove the primary lift</span>
+            </div>
+            <div class="result-card">
+                <span class="r-num">+58%</span>
+                <span class="r-label">Checkout Completion</span>
+                <span class="r-desc">38% → 60% — the highest-impact single change</span>
+            </div>
+            <div class="result-card">
+                <span class="r-num">€54k</span>
+                <span class="r-label">Monthly Revenue Unlocked</span>
+                <span class="r-desc">Existing traffic, corrected funnel — no additional ad spend</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Before vs. After</h2>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Before Optimization</th>
+                    <th>After Optimization</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Add-to-Cart CTA below the fold on mobile (68% of traffic)</td>
+                    <td>Sticky CTA visible throughout scroll with embedded risk reversal</td>
+                </tr>
+                <tr>
+                    <td>840-word product description — exhausting, features-focused</td>
+                    <td>120-word outcome summary + expandable specifications</td>
+                </tr>
+                <tr>
+                    <td>340 reviews hidden on a product tab below the fold</td>
+                    <td>Star rating + review count visible above the fold, immediately</td>
+                </tr>
+                <tr>
+                    <td>Shipping cost revealed at cart — surprise friction</td>
+                    <td>Shipping cost visible on product page — expectation managed</td>
+                </tr>
+                <tr>
+                    <td>Mandatory account creation before checkout</td>
+                    <td>Guest checkout default; account creation optional post-purchase</td>
+                </tr>
+                <tr>
+                    <td>14-field checkout form with no trust signals</td>
+                    <td>9-field form with SSL badge, guarantee, and security indicators</td>
+                </tr>
+                <tr>
+                    <td>Overall CVR: 1.1%</td>
+                    <td>Overall CVR: 2.6%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">Key Insights</h2>
+
+        <h3 class="sub-title">On Conversion Rate Optimization</h3>
+        <p>CRO is not about aesthetics and it is not about A/B testing random elements until something moves. It is a diagnostic discipline. You must know precisely where in the funnel revenue is leaking, precisely which visitor segment is leaking there, and precisely what friction is causing the abandonment — before touching a single element. The changes that moved this funnel from 1.1% to 2.6% were not creative insights. They were direct responses to what the behavioral data showed.</p>
+
+        <h3 class="sub-title">On Neuromarketing</h3>
+        <p>The most impactful changes in this project were psychological, not technical: moving the social proof above the fold, embedding risk reversal directly into the CTA, and eliminating the surprise shipping cost. None of these required a developer. All of them required understanding how purchase decisions are actually made — which has almost nothing to do with how product managers think purchase decisions are made.</p>
+
+        <h3 class="sub-title">On the Real Cost of a Bad Funnel</h3>
+        <p>This brand was spending €15,000/month on paid traffic. At 1.1% CVR, that traffic was generating €43,000 in revenue. At 2.6% CVR, the same traffic generates approximately €102,000. The proposed budget increase of €15,000/month would have added perhaps €8,000 in revenue at the original CVR. The CRO project added €59,000. This is not an argument against paid traffic — it's an argument for fixing the funnel before buying more of it.</p>
+
+        <h2 class="section-title">Next Steps</h2>
+        <p><strong>Post-purchase upsell sequence:</strong> With checkout friction resolved and CVR at 5.1%, the next revenue lever is average order value. A post-purchase upsell page — shown between the checkout completion and the confirmation email — converts at 10–25% with zero additional traffic cost and zero additional friction in the primary purchase journey.</p>
+        <p><strong>Personalised product page copy by traffic source:</strong> Visitors from Meta ads arrive with different context and intent than visitors from Google Shopping. Dynamically serving different above-the-fold copy based on UTM source (using Shogun or similar) would allow the product page to speak directly to the specific motivation of each traffic segment — a personalization approach that typically adds 15–30% additional CVR lift on top of a base-optimized page.</p>
+        <p><strong>LTV-based cohort analysis:</strong> The CVR improvement is measured on first-purchase rate. The next question is whether the optimization changed the quality of customers acquired — specifically, whether the checkout simplification attracted lower-intent buyers with higher return rates. A 60-day cohort analysis comparing return rates and second-purchase rates pre/post-optimization would answer this definitively.</p>
+
+        <div class="article-cta">
+            <h3>Your funnel is probably leaking more than you think.</h3>
+            <p>If your store is converting below 3%, the problem isn't your traffic — it's a set of specific, fixable friction points. We can diagnose them in one week and fix them in sixty days.</p>
+            <a href="contact.html" class="btn-cta">Get a Free Funnel Audit →</a>
+        </div>
+
+    </div>
+</div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© 2026 Mohamed Ghallab. All rights reserved.</span>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Case Studies</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

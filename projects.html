@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Case Studies — Mohamed Ghallab. Real e-commerce problems, real systems built, real revenue recovered. Deep-dive breakdowns of tracking, CRO, AI automation, and lead recovery projects.">
+    <title>Case Studies — Mohamed Ghallab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07101f; --bg-2: #0d1a2d; --bg-card: #111f33;
+            --border: rgba(255,255,255,0.06); --border-hi: rgba(59,130,246,0.28);
+            --blue: #3b82f6; --blue-light: #60a5fa; --cyan: #06b6d4;
+            --red: #ef4444; --green: #22c55e;
+            --text: #f0f4f8; --text-2: #8fa3bb; --text-3: #4e6275;
+            --nav-h: 72px; --r: 12px; --r-lg: 20px;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+        a { text-decoration:none; color:inherit; }
+        ul { list-style:none; }
+
+        /* NAV */
+        nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); background:rgba(7,16,31,0.88); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); z-index:100; display:flex; align-items:center; }
+        .nav-inner { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1160px; margin:0 auto; padding:0 24px; }
+        .logo { font-size:1.2rem; font-weight:800; letter-spacing:-0.5px; }
+        .logo-dot { color:var(--blue); }
+        .nav-links { display:flex; align-items:center; gap:2rem; }
+        .nav-links a { font-size:0.875rem; font-weight:500; color:var(--text-2); transition:color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text); }
+        .btn-nav { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:0.875rem; font-weight:600; background:linear-gradient(135deg,#3b82f6,#2563eb); color:#fff; box-shadow:0 4px 16px rgba(59,130,246,0.25); transition:all 0.2s; }
+        .btn-nav:hover { transform:translateY(-1px); box-shadow:0 6px 24px rgba(59,130,246,0.4); }
+
+        /* CONTAINER */
+        .container { width:100%; max-width:1160px; margin:0 auto; padding:0 24px; }
+
+        /* PAGE HEADER */
+        .page-header { padding-top:calc(var(--nav-h) + 80px); padding-bottom:80px; }
+        .page-tag { display:inline-flex; align-items:center; gap:8px; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue-light); margin-bottom:1rem; }
+        .page-tag::before { content:''; width:18px; height:2px; background:var(--blue); display:inline-block; border-radius:2px; }
+        .page-header h1 { font-size:clamp(2rem,4vw,3.5rem); font-weight:900; letter-spacing:-2.5px; line-height:1.08; margin-bottom:1.25rem; }
+        .gradient-text { background:linear-gradient(135deg,#3b82f6,#06b6d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .page-header p { font-size:1.05rem; color:var(--text-2); max-width:560px; line-height:1.75; }
+
+        /* FILTER STRIP */
+        .filter-strip { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding-bottom:48px; }
+        .filter-tag { display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:600; padding:7px 16px; border-radius:100px; border:1px solid var(--border); color:var(--text-2); transition:all 0.2s; cursor:default; }
+        .filter-tag.active { background:rgba(59,130,246,0.1); border-color:rgba(59,130,246,0.3); color:var(--blue-light); }
+
+        /* CASE STUDIES GRID */
+        .cases-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; padding-bottom:100px; }
+
+        .case-card {
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            border-radius:var(--r-lg);
+            padding:36px 32px;
+            display:flex;
+            flex-direction:column;
+            transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            position:relative;
+            overflow:hidden;
+            text-decoration:none;
+        }
+        .case-card::after {
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0;
+            height:2px;
+            opacity:0;
+            transition:opacity 0.3s;
+        }
+        .case-card.tracking::after  { background:linear-gradient(90deg,#3b82f6,#06b6d4); }
+        .case-card.cro::after       { background:linear-gradient(90deg,#f59e0b,#ef4444); }
+        .case-card.chatbot::after   { background:linear-gradient(90deg,#22c55e,#06b6d4); }
+        .case-card.recovery::after  { background:linear-gradient(90deg,#a855f7,#3b82f6); }
+
+        .case-card:hover {
+            transform:translateY(-6px);
+            border-color:var(--border-hi);
+            box-shadow:0 24px 60px rgba(0,0,0,0.35);
+        }
+        .case-card:hover::after { opacity:1; }
+
+        .case-num {
+            font-size:0.68rem;
+            font-weight:700;
+            letter-spacing:0.12em;
+            text-transform:uppercase;
+            color:var(--text-3);
+            margin-bottom:1rem;
+        }
+        .case-category {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            font-size:0.7rem;
+            font-weight:700;
+            letter-spacing:0.08em;
+            text-transform:uppercase;
+            color:var(--blue-light);
+            background:rgba(59,130,246,0.08);
+            border:1px solid rgba(59,130,246,0.16);
+            padding:4px 12px;
+            border-radius:100px;
+            margin-bottom:1.5rem;
+            align-self:flex-start;
+        }
+        .case-card h2 {
+            font-size:1.2rem;
+            font-weight:800;
+            letter-spacing:-0.5px;
+            line-height:1.3;
+            margin-bottom:1rem;
+        }
+        .case-card > p {
+            font-size:0.875rem;
+            color:var(--text-2);
+            line-height:1.75;
+            margin-bottom:1.5rem;
+            flex:1;
+        }
+
+        /* METRICS ROW */
+        .case-metrics {
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:10px;
+            margin-bottom:1.5rem;
+        }
+        .case-metric {
+            background:var(--bg-2);
+            border:1px solid var(--border);
+            border-radius:9px;
+            padding:12px 8px;
+            text-align:center;
+        }
+        .cm-num {
+            display:block;
+            font-size:1.25rem;
+            font-weight:900;
+            letter-spacing:-1px;
+            background:linear-gradient(135deg,#3b82f6,#06b6d4);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+            background-clip:text;
+            line-height:1;
+            margin-bottom:3px;
+        }
+        .cm-label {
+            font-size:0.65rem;
+            color:var(--text-3);
+            line-height:1.3;
+        }
+
+        /* TAGS */
+        .case-tags {
+            display:flex;
+            flex-wrap:wrap;
+            gap:7px;
+            margin-bottom:1.5rem;
+        }
+        .case-tag {
+            font-size:0.72rem;
+            font-weight:600;
+            background:rgba(255,255,255,0.04);
+            border:1px solid var(--border);
+            color:var(--text-3);
+            padding:3px 10px;
+            border-radius:100px;
+        }
+
+        .read-link {
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            font-size:0.85rem;
+            font-weight:700;
+            color:var(--blue-light);
+            transition:gap 0.2s, color 0.2s;
+            margin-top:auto;
+        }
+        .case-card:hover .read-link { gap:10px; color:#93c5fd; }
+
+        /* FEATURED (full-width card) */
+        .case-card.featured {
+            grid-column: 1 / -1;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:3rem;
+        }
+        .case-card.featured .case-content { display:flex; flex-direction:column; }
+        .case-card.featured .case-visual {
+            background:var(--bg-2);
+            border-radius:var(--r);
+            border:1px solid var(--border);
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            padding:20px;
+            align-self:center;
+        }
+        .mini-metric {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            border-radius:8px;
+            padding:12px 14px;
+        }
+        .mini-label { font-size:0.75rem; color:var(--text-3); }
+        .mini-val { font-size:1rem; font-weight:800; letter-spacing:-0.5px; }
+        .mini-val.up { color:var(--green); }
+        .mini-val.blue { color:var(--blue-light); }
+        .mini-val.red { color:var(--red); }
+        .mini-bar-wrap { padding:10px 14px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; }
+        .mini-bar-label { font-size:0.7rem; color:var(--text-3); margin-bottom:6px; display:flex; justify-content:space-between; }
+        .mini-bar-bg { height:5px; background:rgba(255,255,255,0.05); border-radius:100px; overflow:hidden; }
+        .mini-bar-fill { height:100%; border-radius:100px; }
+        .fill-good { background:linear-gradient(90deg,#22c55e,#16a34a); }
+        .fill-warn { background:linear-gradient(90deg,#f59e0b,#d97706); }
+        .fill-bad  { background:linear-gradient(90deg,#ef4444,#dc2626); }
+
+        /* CTA BANNER */
+        .cta-banner {
+            background:var(--bg-2);
+            border:1px solid var(--border-hi);
+            border-radius:var(--r-lg);
+            padding:60px 48px;
+            text-align:center;
+            margin-bottom:100px;
+            position:relative;
+            overflow:hidden;
+        }
+        .cta-banner::before {
+            content:'';
+            position:absolute;
+            top:50%; left:50%;
+            transform:translate(-50%,-50%);
+            width:700px; height:300px;
+            background:radial-gradient(ellipse,rgba(59,130,246,0.1) 0%,transparent 70%);
+            pointer-events:none;
+        }
+        .cta-banner h2 { font-size:clamp(1.5rem,3vw,2.25rem); font-weight:900; letter-spacing:-1.5px; margin-bottom:1rem; position:relative; }
+        .cta-banner p { font-size:1rem; color:var(--text-2); max-width:480px; margin:0 auto 2rem; position:relative; }
+        .cta-btns { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; position:relative; }
+        .btn-danger { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:8px; font-size:0.9rem; font-weight:700; background:linear-gradient(135deg,#ef4444,#dc2626); color:#fff; box-shadow:0 4px 20px rgba(239,68,68,0.3); transition:all 0.2s; }
+        .btn-danger:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(239,68,68,0.45); }
+        .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:8px; font-size:0.9rem; font-weight:600; background:transparent; border:1px solid var(--border); color:var(--text-2); transition:all 0.2s; }
+        .btn-ghost:hover { border-color:var(--border-hi); color:var(--text); background:rgba(59,130,246,0.05); }
+
+        /* FOOTER */
+        footer { background:var(--bg-2); border-top:1px solid var(--border); padding:60px 0 32px; }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+        .footer-brand p { font-size:0.85rem; color:var(--text-3); line-height:1.7; margin-top:0.75rem; max-width:230px; }
+        .footer-col h5 { font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-3); margin-bottom:1rem; }
+        .footer-col a { display:block; font-size:0.855rem; color:var(--text-2); margin-bottom:0.55rem; transition:color 0.2s; }
+        .footer-col a:hover { color:var(--blue-light); }
+        .footer-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:2rem; border-top:1px solid var(--border); font-size:0.78rem; color:var(--text-3); }
+
+        /* RESPONSIVE */
+        @media (max-width:900px) {
+            .cases-grid { grid-template-columns:1fr; }
+            .case-card.featured { grid-template-columns:1fr; }
+            .case-card.featured .case-visual { display:none; }
+        }
+        @media (max-width:768px) {
+            .nav-links { display:none; }
+            .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
+            .footer-bottom { flex-direction:column; gap:0.5rem; text-align:center; }
+            .cta-banner { padding:40px 24px; }
+        }
+        @media (max-width:480px) {
+            .case-metrics { grid-template-columns:1fr 1fr; }
+            .footer-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="logo">G<span class="logo-dot">.</span>M</a>
+        <ul class="nav-links">
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="projects.html" class="active">Case Studies</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <a href="contact.html" class="btn-nav">Get Free Revenue Audit →</a>
+    </div>
+</nav>
+
+<main>
+
+    <!-- PAGE HEADER -->
+    <div class="container">
+        <div class="page-header">
+            <div class="page-tag">Proof of Work</div>
+            <h1>Real Stores.<br><span class="gradient-text">Real Revenue Recovered.</span></h1>
+            <p>Not case study summaries. Full diagnostic breakdowns — the problems, the thinking, the systems built, and the business impact measured in euros, not impressions.</p>
+        </div>
+
+        <!-- FILTER STRIP -->
+        <div class="filter-strip">
+            <span class="filter-tag active">All Projects</span>
+            <span class="filter-tag">📡 Tracking</span>
+            <span class="filter-tag">⚡ CRO</span>
+            <span class="filter-tag">🤖 AI Automation</span>
+            <span class="filter-tag">🔄 Lead Recovery</span>
+        </div>
+
+        <!-- CASES GRID -->
+        <div class="cases-grid">
+
+            <!-- CASE 1: TRACKING (Featured - full width) -->
+            <a href="case-tracking.html" class="case-card tracking featured">
+                <div class="case-content">
+                    <div class="case-num">Case Study 01</div>
+                    <div class="case-category">📡 Tracking & Attribution</div>
+                    <h2>Rebuilding Revenue Attribution Accuracy by +18%: The Attribution System That Was Costing €18k/Month</h2>
+                    <p>Client-side pixels were missing 28–35% of actual conversions due to Apple ITP and ad blockers. €18,000/month in ad budget was flowing to underperforming channels because the data couldn't see which campaigns were actually driving revenue. The entire tracking infrastructure was rebuilt server-side.</p>
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="cm-num">+18%</span>
+                            <span class="cm-label">Attribution Accuracy</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="cm-num">€18k</span>
+                            <span class="cm-label">Monthly Waste Fixed</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="cm-num">&lt;8%</span>
+                            <span class="cm-label">Affiliate Gap (was 45%)</span>
+                        </div>
+                    </div>
+                    <div class="case-tags">
+                        <span class="case-tag">Server-Side GTM</span>
+                        <span class="case-tag">Meta Conversions API</span>
+                        <span class="case-tag">GA4 Measurement Protocol</span>
+                        <span class="case-tag">BigQuery</span>
+                        <span class="case-tag">Custom Affiliate Engine</span>
+                    </div>
+                    <span class="read-link">Read Full Case Study →</span>
+                </div>
+                <div class="case-visual">
+                    <div class="mini-metric">
+                        <span class="mini-label">True Meta ROAS</span>
+                        <span class="mini-val blue">2.2x</span>
+                    </div>
+                    <div class="mini-metric">
+                        <span class="mini-label">Reported ROAS (before)</span>
+                        <span class="mini-val red">1.6x</span>
+                    </div>
+                    <div class="mini-bar-wrap">
+                        <div class="mini-bar-label"><span>Conversions captured</span><span>Before: 59%</span></div>
+                        <div class="mini-bar-bg"><div class="mini-bar-fill fill-bad" style="width:59%"></div></div>
+                    </div>
+                    <div class="mini-bar-wrap">
+                        <div class="mini-bar-label"><span>Conversions captured</span><span>After: 97%</span></div>
+                        <div class="mini-bar-bg"><div class="mini-bar-fill fill-good" style="width:97%"></div></div>
+                    </div>
+                    <div class="mini-metric">
+                        <span class="mini-label">Affiliate Tracking Gap</span>
+                        <span class="mini-val up">−55pp</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- CASE 2: CRO -->
+            <a href="case-cro.html" class="case-card cro">
+                <div class="case-num">Case Study 02</div>
+                <div class="case-category">⚡ CRO + Funnel Optimization</div>
+                <h2>1.1% to 2.6% Conversion Rate in 60 Days: Diagnosing and Fixing a Leaking E-commerce Funnel</h2>
+                <p>Traffic was healthy. ROAS looked acceptable. But a 1.1% conversion rate meant the store was operating at less than a third of what behaviorally-identical stores in the same vertical were achieving. The problem wasn't the ads — it was four simultaneous friction points in the funnel that were blocking the path to purchase. Each was diagnosed with behavioral data and fixed systematically.</p>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="cm-num">+136%</span>
+                        <span class="cm-label">Conversion Rate</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="cm-num">60 days</span>
+                        <span class="cm-label">Time to Result</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="cm-num">€0</span>
+                        <span class="cm-label">Extra Ad Spend</span>
+                    </div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tag">Microsoft Clarity</span>
+                    <span class="case-tag">Heatmap Analysis</span>
+                    <span class="case-tag">Neuromarketing</span>
+                    <span class="case-tag">Checkout Optimization</span>
+                    <span class="case-tag">A/B Testing</span>
+                </div>
+                <span class="read-link">Read Full Case Study →</span>
+            </a>
+
+            <!-- CASE 3: CHATBOT -->
+            <a href="case-chatbot.html" class="case-card chatbot">
+                <div class="case-num">Case Study 03</div>
+                <div class="case-category">🤖 AI Customer Automation</div>
+                <h2>AI Chatbot Cuts Support Tickets by 28% and Recovers Abandoned Carts 24/7 While the Team Sleeps</h2>
+                <p>65% of all support tickets were WISMO queries that a machine could answer in 10 seconds. The team was answering them manually at 4 minutes each — spending 41% of one agent's working week on a problem that had a fully automated solution. Meanwhile, abandoned cart recovery was manual, 4 hours delayed, and recovering 4% of a €180k/month opportunity. Both were replaced with AI systems.</p>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="cm-num">−28%</span>
+                        <span class="cm-label">Support Tickets</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="cm-num">+15%</span>
+                        <span class="cm-label">Cart Recovery</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="cm-num">24/7</span>
+                        <span class="cm-label">Active</span>
+                    </div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tag">OpenAI GPT-4o</span>
+                    <span class="case-tag">Shopify API</span>
+                    <span class="case-tag">n8n Automation</span>
+                    <span class="case-tag">WhatsApp Business</span>
+                    <span class="case-tag">Gorgias Integration</span>
+                </div>
+                <span class="read-link">Read Full Case Study →</span>
+            </a>
+
+            <!-- CASE 4: LEAD RECOVERY -->
+            <a href="case-lead-recovery.html" class="case-card recovery">
+                <div class="case-num">Case Study 04</div>
+                <div class="case-category">🔄 AI Lead Recovery</div>
+                <h2>The Lead Recovery Machine: Recovering Lost Revenue from Leads Written Off as Cold</h2>
+                <p>420 leads per month. 35–50% going cold within 72 hours. The assumption: low-quality leads. The reality: high-intent buyers going to competitors who responded within minutes while this business's average first-contact time was 18 hours. An automated system was built that responds in under 2 minutes, 24/7, with a personalised message — and reactivated 12 months of cold lead history to recover €60k in a single campaign.</p>
+                <div class="case-metrics">
+                    <div class="case-metric">
+                        <span class="cm-num">+12%</span>
+                        <span class="cm-label">Lead Re-engagement</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="cm-num">&lt;2min</span>
+                        <span class="cm-label">Response Time</span>
+                    </div>
+                    <div class="case-metric">
+                        <span class="cm-num">€60k</span>
+                        <span class="cm-label">Recovered (one campaign)</span>
+                    </div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tag">n8n</span>
+                    <span class="case-tag">OpenAI GPT-4o</span>
+                    <span class="case-tag">WhatsApp API</span>
+                    <span class="case-tag">HubSpot CRM</span>
+                    <span class="case-tag">Intent Classification</span>
+                </div>
+                <span class="read-link">Read Full Case Study →</span>
+            </a>
+
+        </div><!-- end cases-grid -->
+
+        <!-- CTA BANNER -->
+        <div class="cta-banner">
+            <h2>Your Store Has the Same Problems.<br><span class="gradient-text">The Data Will Prove It.</span></h2>
+            <p>Every one of these case studies started with a business that thought the problem was traffic, ad spend, or product. The audit revealed something fixable. We can do the same for your store.</p>
+            <div class="cta-btns">
+                <a href="contact.html" class="btn-danger">Get a Free Revenue Audit →</a>
+                <a href="index.html#services" class="btn-ghost">See All Services</a>
+            </div>
+        </div>
+
+    </div><!-- end container -->
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">G<span class="logo-dot">.</span>M</a>
+                <p>E-commerce growth, analytics & automation specialist. I build systems that recover lost revenue and scale what works.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Services</h5>
+                <a href="index.html#services">Tracking & Attribution</a>
+                <a href="index.html#services">Conversion Optimization</a>
+                <a href="index.html#services">AI Automation</a>
+                <a href="index.html#services">Analytics Systems</a>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <a href="about.html">About</a>
+                <a href="projects.html">Case Studies</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h5>Contact</h5>
+                <a href="tel:+491631647540">+49 163 164 7540</a>
+                <a href="mailto:info.ghallabmohamed@gmail.com">info.ghallabmohamed@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Mohamed Ghallab. All rights reserved.</span>
+            <span>E-commerce Growth & Automation Specialist</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
